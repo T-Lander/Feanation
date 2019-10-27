@@ -11,13 +11,15 @@
 
     <body>
 
-      <nav class="navbar text-white bg-dark py-4">
-        <a class="navbar-brand">Feanation</a>
-      </nav>
+      @include('includes.navbar')
 
-      <main class="container py-5">
+      <main class="container p-5">
         @yield('content')
       <main>
 
+      @include('includes.footer')
+
+      @include('includes.scripts')
+      
     </body>
 </html>
