@@ -2,7 +2,13 @@
 
 @section('content')
     
+    
+    <a href="events/create" class="text-white">
+        <button class="btn btn-primary float-right">Create new event</button>
+    </a>
+    
     <h3>Upcoming events</h3>
+    
     <hr>
     
     @if(count($events) > 0)
@@ -24,8 +30,11 @@
 
     @else
         <div class="card my-3">
-            <h1>No events yet</h1>
-            <p>But don't worry, I'm sure someone'll post something soon!</p>
+                <div class="card-body">
+                    <h2 class="card-title">No events yet</h2>
+                    <p class="card-text">But don't worry, I'm sure someone'll post something soon!</p>
+                </div>
+            <p></p>
         </div>
     @endif
 

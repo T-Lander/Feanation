@@ -14,7 +14,7 @@ class EventsController extends Controller
      */
     public function index()
     {
-        $events = Event::orderBy('created_at', 'DESC')->paginate(1);
+        $events = Event::orderBy('created_at', 'DESC')->paginate(10);
         return view('pages.events.index')->with('events', $events);
     }
 
@@ -25,7 +25,7 @@ class EventsController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.events.create');
     }
 
     /**
@@ -36,7 +36,19 @@ class EventsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+
+        // Create Event
+        $event = new Event;
+        $event->title = $request->input('title');
+        $event->description = $request->input('description');
+        $event->save();
+
+        return redirect('/events')->with('success', 'Event has been made.');
     }
 
     /**
@@ -60,7 +72,8 @@ class EventsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $event = Event::find($id);
+        return view('pages.events.edit')->with('event', $event); 
     }
 
     /**
@@ -72,7 +85,19 @@ class EventsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Validate
+        $request->validate([
+        'title' => 'required',
+        'description' => 'required',
+        ]);
+        
+        // Create Event
+        $event = Event::find($id);
+        $event->title = $request->input('title');
+        $event->description = $request->input('description');
+        $event->save();
+        
+        return redirect('/events')->with('success', 'Event has been changed.');
     }
 
     /**
