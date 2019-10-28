@@ -12,4 +12,5 @@
 */
 
 Route::get('/', 'PagesController@index');
-Route::get('/events', 'PagesController@events');
+
+Route::resource('events', 'EventsController');
