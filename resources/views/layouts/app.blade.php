@@ -1,24 +1,39 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{{config('app.name', 'Feanation')}}</title>
-        <link rel="stylesheet" href="{{asset('css/app.css')}}">
-    </head>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <body>
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Feanation') }}</title>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
 
       @include('includes.navbar')
 
-      <main class="container p-5">
+      <main class="container py-4">
         @include('includes.messages')
         @yield('content')
-      <main>
+      </main>
 
       @include('includes.footer')
 
       @include('includes.scripts')
-      
-    </body>
+
+    </div>
+</body>
 </html>

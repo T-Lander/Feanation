@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    
-    
+        
+    @auth
     <a href="events/create" class="text-white">
         <button class="btn btn-primary float-right">Create new event</button>
     </a>
+    @endauth
     
     <h3>Upcoming events</h3>
     
