@@ -14,7 +14,11 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/events">Events</a>
+                        <a class="nav-link" href="/events"> Events </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/events"> Messageboard </a>
                     </li>
                 </ul>
 
@@ -37,9 +41,20 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ action('ProfileController@index') }}">
+                                    <i class="material-icons">account_box</i>
+                                    My profile
+                                </a>
+
+                                <a class="dropdown-item" href="#">
+                                        <i class="material-icons">star</i>
+                                        My trophies
+                                </a>
+
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
+                                    <i class="material-icons">exit_to_app</i>
                                     {{ __('Logout') }}
                                 </a>
 
