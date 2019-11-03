@@ -21,5 +21,5 @@ Auth::routes();
 
 Route::get('profile', 'ProfileController@index');
 
-Route::get('admin', 'AdminController@index');
-Route::post('admin', 'AdminController@search');
+Route::get('admin', 'AdminController@index')->middleware('admin');
+Route::post('admin', 'AdminController@search')->middleware('admin');

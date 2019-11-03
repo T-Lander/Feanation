@@ -67,10 +67,17 @@ class RegisterController extends Controller
     {
         $rankId = Rank::where('name', 'unranked')->first()->value('id');
 
-        return User::create([
+        $user = User::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'rank_id' => 1,
         ]);
+
+        $user->rank_id = 1;
+        $user->save();
+        
+        return $user;
+
     }
 }

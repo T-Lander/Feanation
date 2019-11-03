@@ -26,15 +26,15 @@
 
                             <div class="btn-group btn-group-toggle ml-2" data-toggle="buttons">
                                 <label class="btn btn-secondary active">
-                                    <input type="radio" name="filter" autocomplete="off" checked> All
+                                    <input type="radio" name="filter" autocomplete="off" checked value="all"> All
                                 </label>
 
                                 <label class="btn btn-secondary">
-                                    <input type="radio" name="filter" autocomplete="off"> Users
+                                    <input type="radio" name="filter" autocomplete="off" value="users"> Users
                                 </label>
 
                                 <label class="btn btn-secondary">
-                                    <input type="radio" name="filter" autocomplete="off"> Admins
+                                    <input type="radio" name="filter" autocomplete="off" value="admins"> Admins
                                 </label>
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                     <tr>
                         <td>{{$user->username}}</td>
                         <td>{{$user->email}}</td>
-                        <td>undefined</td>
+                        <td>{{$user->rank->name}}</td>
                         <td>{{$user->created_at}}</th>
                     </tr>
                     @endforeach
