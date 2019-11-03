@@ -46,9 +46,9 @@
                                     My profile
                                 </a>
 
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="/admin">
                                         <i class="material-icons">star</i>
-                                        My trophies
+                                        Admin
                                 </a>
 
                                 <a class="dropdown-item" href="{{ route('logout') }}"

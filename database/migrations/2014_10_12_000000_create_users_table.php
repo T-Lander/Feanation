@@ -17,9 +17,9 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('username')->unique();
             $table->string('email')->unique();
-            $table->string('rsn');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->integer('rank_id')->unsigned();
             $table->rememberToken();
             $table->timestamps();
         });

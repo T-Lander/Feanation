@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'PagesController@index');
+Route::get('test', 'PagesController@test');
 
 Route::resource('events', 'EventsController');
 Route::get('events/{id}/highlight', 'EventsController@highlight');
@@ -19,3 +20,6 @@ Route::get('events/{id}/highlight', 'EventsController@highlight');
 Auth::routes();
 
 Route::get('profile', 'ProfileController@index');
+
+Route::get('admin', 'AdminController@index');
+Route::post('admin', 'AdminController@search');

@@ -6,6 +6,7 @@
     <hr>
 
     <div class="jumbotron">
+        @if($highlighted)
         <h3>{{$highlighted->title}}</h3>
         <p class="lead">{{$highlighted->description}}</p>
         <hr>
@@ -15,6 +16,12 @@
         <a href="/events/{{$highlighted->id}}">
             <button class="btn btn-primary float-right">Learn more about this event</button>
         </a>
+
+        @else 
+        <h3>No highlighted event</h3>
+        <hr>
+        @endif
+
     </div>
 
     <h3>Upcoming events</h3>

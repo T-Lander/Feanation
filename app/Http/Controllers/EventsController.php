@@ -8,6 +8,11 @@ use App\Event;
 
 class EventsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -79,6 +84,13 @@ class EventsController extends Controller
     public function edit($id)
     {
         $event = Event::find($id);
+
+        if(auth()->user()->id !== $event->user_id){
+
+           return redirect('events'); 
+
+        }
+
         return view('pages.events.edit')->with('event', $event); 
     }
 
