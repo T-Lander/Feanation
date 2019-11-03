@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Rank;
 
 class AdminController extends Controller
 {
@@ -21,20 +22,20 @@ class AdminController extends Controller
         {
             $result = User::where([
                 ['username', 'like', "%{$search}%"],
-                ['rank_id', '8'],
+                ['rank_id', Rank::where('name', 'admin')->first()->id],
                 ])->orWhere([
                 ['username', 'sounds like', "%{$search}%"],
-                ['rank_id', '8'],
+                ['rank_id', Rank::where('name', 'admin')->first()->id],
                 ])->paginate(10);
 
         } elseif($filter == 'users') 
         {
             $result = User::where([
                 ['username', 'like', "%{$search}%"],
-                ['rank_id','!=', '8'],
+                ['rank_id','!=', Rank::where('name', 'admin')->first()->id],
                 ])->orWhere([
                 ['username', 'sounds like', "%{$search}%"],
-                ['rank_id','!=', '8'],
+                ['rank_id','!=', Rank::where('name', 'admin')->first()->id],
                 ])->paginate(10);
 
         } else 

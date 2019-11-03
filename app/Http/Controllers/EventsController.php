@@ -115,7 +115,6 @@ class EventsController extends Controller
         $event->date = $request->input('date');
         $event->title = $request->input('title');
         $event->description = $request->input('description');
-        $event->highlighted = 'false';
         $event->save();
         
         return redirect('/events')->with('success', 'Event has been changed.');
