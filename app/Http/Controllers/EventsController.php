@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Event;
 
 class EventsController extends Controller
@@ -14,8 +15,10 @@ class EventsController extends Controller
      */
     public function index()
     {
-        $events = Event::orderBy('created_at', 'DESC')->paginate(10);
-        return view('pages.events.index')->with('events', $events);
+        $events = Event::with('user')->orderBy('date', 'DESC')->paginate(10);
+        $highlighted = Event::where('highlight', '=', true)->first();
+
+        return view('pages.events.index')->with(['events' => $events, 'highlighted' => $highlighted]);
     }
 
     /**
@@ -46,6 +49,9 @@ class EventsController extends Controller
         $event = new Event;
         $event->title = $request->input('title');
         $event->description = $request->input('description');
+        $event->date = $request->input('date');
+        $event->user_id = auth()->user()->id;
+        $event->highlight = false;
         $event->save();
 
         return redirect('/events')->with('success', 'Event has been made.');
@@ -87,14 +93,17 @@ class EventsController extends Controller
     {
         // Validate
         $request->validate([
+        'date' => 'required',
         'title' => 'required',
         'description' => 'required',
         ]);
         
         // Create Event
         $event = Event::find($id);
+        $event->date = $request->input('date');
         $event->title = $request->input('title');
         $event->description = $request->input('description');
+        $event->highlighted = 'false';
         $event->save();
         
         return redirect('/events')->with('success', 'Event has been changed.');
@@ -112,5 +121,12 @@ class EventsController extends Controller
         $event -> delete();
 
         return redirect('/events')->with('success', 'Event has been removed.');
+    }
+
+    public function highlight($id)
+    {
+        DB::table('events') -> update(['highlight' => false]);
+        Event::where('id', $id) -> update(['highlight' => true]);
+        return redirect('/events');
     }
 }

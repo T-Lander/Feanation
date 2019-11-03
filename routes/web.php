@@ -14,6 +14,7 @@
 Route::get('/', 'PagesController@index');
 
 Route::resource('events', 'EventsController');
+Route::get('events/{id}/highlight', 'EventsController@highlight');
 
 Auth::routes();
 

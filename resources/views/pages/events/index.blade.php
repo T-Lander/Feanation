@@ -2,32 +2,59 @@
 
 @section('content')
         
-    @auth
-    <a href="events/create" class="text-white">
-        <button class="btn btn-primary float-right">Create new event</button>
-    </a>
-    @endauth
-    
+    <h3>Highlighted event</h3>
+    <hr>
+
+    <div class="jumbotron">
+        <h3>{{$highlighted->title}}</h3>
+        <p class="lead">{{$highlighted->description}}</p>
+        <hr>
+        <p class="text-muted">
+            This event will take place on {{$highlighted->date}}.
+        </p>
+        <a href="/events/{{$highlighted->id}}">
+            <button class="btn btn-primary float-right">Learn more about this event</button>
+        </a>
+    </div>
+
     <h3>Upcoming events</h3>
-    
     <hr>
     
     @if(count($events) > 0)
+    <table class="table table-hover table-striped table-light">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Posted by</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($events as $event)
+            <tr>
+                <td>{{$event->title}}</td>
+                <td>{{$event->date}}</td>
+                <td>{{$event->user->username}}</td>
+                <td class="float-right">
+                    <a href="{{ action('EventsController@highlight', $event->id) }}">
+                        @if($event->highlight == true)
+                        <i class="material-icons text-warning">star</i>
+                        @else
+                        <i class="material-icons text-warning">star_border</i>
+                        @endif
+                    </a>
 
-        @foreach($events as $event)
-            <div class="card my-3">
-                <img class="card-img-top" src="">
-                <div class="card-body">
-                    <h2 class="card-title">{{$event->title}}</h2>
-                    <p class="card-subtitle text-muted ">Event date goes here.</p><br>
-                    <p class="card-text">{{$event->description}}</p><br>
-                    <a href="/events/{{$event->id}}" class="btn btn-primary btn-sm">Find out more</a>
-                    <p class="text-muted float-right">Posted on {{$event->created_at}}</p>
-                </div>
-            </div> 
-        @endforeach
+                    <a href="/events/{{$event->id}}">
+                        <button class="btn btn-primary">Find out more</button>
+                    </a>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 
-        {{$events->links('includes.paginator')}}
+    {{$events->links('includes.paginator')}}
 
     @else
         <div class="card my-3">
@@ -38,5 +65,14 @@
             <p></p>
         </div>
     @endif
+
+    @auth
+    <a href="events/create" class="text-dark float-right">
+        <button class="btn btn-primary">
+            <i class="material-icons">add</i>
+            Create new event
+        </button>
+    </a>
+    @endauth
 
 @endsection

@@ -5,8 +5,13 @@
     <h3>Create a new event</h3>
     <hr>
 
-    <form action="{{action('EventsController@store')}}" method="POST">
+    <form action="{{ action('EventsController@store') }}" method="POST">
         @csrf
+
+        <div class="form-group">
+            <label for="date">Date</label>
+            <input class="form-control" type="date" name="date">
+        </div>
 
         <div class="form-group">
             <label for="text">Event name</label>
